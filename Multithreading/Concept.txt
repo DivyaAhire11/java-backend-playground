@@ -19,3 +19,43 @@ Lambda Expression : A Lambda expression is a short and clean way to implement a 
 *  Works only with Functional interface
 *  No class creation
 *  Improve readability
+
+
+Thread Life Cycle:
+  
+  NEW -> RUNNABLE -> RUNNING -> BLOCKED/WAITING  -> TERMINATE
+
+  *) NEW : 
+     --- Thread object created
+     --- Not started yet
+
+  *) RUNNABLE : 
+     --- start() called
+     --- waiting for CPU
+
+   *) RUNNING :
+     --- CPU executing Thread
+
+    *) BLOCKED/WAITING :
+    --- sleeping
+    --- waiting for lock
+    --- waiting for another Thread
+
+    *) TERMINATE :
+    --- run()  complete
+
+Thread Class methods :
+  start() : started thread
+  run()   : Thread logic
+  sleep(ms)  : pause thread
+  join()  : wait for another thread
+  yield()  : give chance to other thread
+  interrupt() : interrupt sleeping thread
+  getName() : Thread name
+  setName() : set thread name
+  setPriority() : set setPriority
+
+
+  Thread Priority:
+    1(MIN) --> 5(NORM) ---> 10(MAX)
+
