@@ -1,0 +1,21 @@
+1. Anonymous Class:
+    An anonymous class is a class without a name that is used to give implementation to:
+    *) interface
+    *) abstract class
+    *) concreate class(method override)
+
+interfaceName ob = new Interfacename(){
+    @override
+    public void method(){
+        //implementation
+    }
+}
+
+Lambda Expression : A Lambda expression is a short and clean way to implement a function interface (interface with only one abstract method).
+--- introduced in Java 8
+
+(parameter ) -> { body }
+
+*  Works only with Functional interface
+*  No class creation
+*  Improve readability
