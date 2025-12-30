@@ -13,7 +13,7 @@ class A implements Runnable{
 }
 public class MyThread2 {
     public static void main(String[] args) {
-        Runnable ob1 = new A();
+        Runnable ob1 = new A();  //it is not a thread
         //  A ob1 = new A();
         //lambda ex : Works whenever we have @Functional interface
         //Runnable is actually a functional interface
