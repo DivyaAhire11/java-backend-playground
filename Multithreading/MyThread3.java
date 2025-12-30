@@ -1,7 +1,7 @@
 package Multithreading;
 
 /**
- * Thraeds and Mutation are together are not a good idea
+ * Threads and Mutation are together are not a good idea
  * If we are working with threads always try that you work with data which are
  * immutable
  * if there is a method which can can do some mutation make it thread safe

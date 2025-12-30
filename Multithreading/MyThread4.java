@@ -11,7 +11,7 @@ class Test extends Thread {
 
 }
 
-public class ThreadState {
+public class MyThread4 {
     public static void main(String[] args) {
         System.out.println("Hello Divya!!");
 
