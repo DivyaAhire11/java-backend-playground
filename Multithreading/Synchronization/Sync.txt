@@ -1,0 +1,10 @@
+
+/**
+ * critical section -> synchronized / lock
+ * no synchronized -> Race condition
+ * Synchronization -> mutual exclusion
+ * bad locking order -> deadlock
+ *
+ * 
+ */
+
