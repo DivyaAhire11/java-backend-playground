@@ -1,24 +1,45 @@
 package Multithreading.Synchronization;
 
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+/**
+ * tryLock(time) -> //Acquires the lock if it is available and returns true ow
+ * wait for given time check again ow return false
+ */
 class BankAccount {
     private int balance = 1000;
 
-    public synchronized void withdraw(int amount) {
+    private final Lock l = new ReentrantLock();
+
+    public void withdraw(int amount) {
         System.out.println(Thread.currentThread().getName() + "  is attempting to withdraw " + amount);
 
-        if (balance >= amount) {
-            System.out.println(Thread.currentThread().getName() + "  proceding with withdraw ");
-            try {
-                Thread.sleep(3000);
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+        try {
+            if (l.tryLock(4000, TimeUnit.MILLISECONDS)) {
+                if (balance >= amount) {
+                    try {
+                        System.out.println(Thread.currentThread().getName() + "  Proceeding withdraw " + amount);
+                        Thread.sleep(3000);
+                        balance -= amount;
+                        System.out.println(Thread.currentThread().getName()
+                                + "  Completed Withdrawal \n Remaining Balance :  " + balance);
+                    } catch (InterruptedException e) {
+                        System.out.println(e);
+                    } finally {
+                        l.unlock();
+                    }
 
-            balance -= amount;
-            System.out
-                    .println(Thread.currentThread().getName() + " Completed Withdrawal. Remaining VAlues :" + balance);
-        } else {
-            System.out.println(Thread.currentThread().getName() + "Insufficient Fund!!");
+                } else {
+                    System.out.println("Insufficient balance :" + balance);
+                }
+            } else {
+                System.out.println(Thread.currentThread().getName()
+                        + " Could not aquuired the lock Please Try Again :  ");
+            }
+        } catch (Exception e) { // InterruptException can cause due to time
+            System.out.println(e);
         }
 
     }
