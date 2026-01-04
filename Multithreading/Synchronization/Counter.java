@@ -1,19 +1,25 @@
 package Multithreading.Synchronization;
+/**
+ * 1.synchronized keyword used
+      --> Only one thread can execute this method at a time
+      -->Lock is on the object
 
+
+    2. SYNCHRONIZED BLOCK : Locks only a specific section of code.
+       --> More efficient than synchronized methods
+       --> Allows non-critical code to run concurrently
+       
+       synchronized(this){
+           cnt++;
+       } 
+ */
 class Counter {
     private int cnt = 0;
 
-    public synchronized void increment() {
+    public synchronized void increment() {  //Locks the entire method.  --> CRITICAL SECTION 
        cnt++;
     }
-    /*
-    1.synchronized keyword used
-    2. SYNCHRONIZED BLOCK : p'cular blk la synchonized krne
-        synchronized(this){
-           cnt++;
-       } 
-    */
-
+    
     public int getCount() {
         return cnt;
     }
