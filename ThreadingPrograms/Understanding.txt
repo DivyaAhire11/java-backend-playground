@@ -1,0 +1,23 @@
+1.run() contains the job of the thread.
+2.JVM calls run() atomatically when the start() is called
+
+** OUTPUT order is not guaranteed in multithreading
+
+3.Runnable is a functional interface : only run()
+4.Multiple inheritance possible in Runnable
+
+5.t1.start() : create new thread , calls run() internally : running Thread Name : Thread-0
+6.t1.run() : no new thread ,running Thread Name : main
+
+7. * Thread Object create : NEW
+   * t1.start(): ready to run waiting for CPU from scedular OR actually executing : RUNNABLE
+   * (Internally RUNNING is a part of RUNNABLE in java)
+   * run() finish : TERMINATE
+
+JAVA THREAD STATE : NEW , RUNNABLE , BLOCKED , WAITING , TIME_WAITING , TERMINATED
+
+8. getState() return current thread state 
+9. sleep(1000) : pause a thread for a fixed time : 1 second : Thread enter in TIME_WAITING state --> then return RUNNABLE
+                --> InterruptedException 
+                --> static method
+                --> Does not release lock
