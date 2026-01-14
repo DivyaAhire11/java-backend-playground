@@ -1,16 +1,13 @@
 package JavaJourney;
 
-import java.util.Enumeration;
 import java.util.Hashtable;
 
 //JFrame,JButton ,JPanel ,JTextArea ,JLabel,JTextField
 import javax.swing.*;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;//BorderLayout , 
+import java.awt.event.*; //ActionEvent , ActionListener
 
 class PracticeQn extends JFrame implements ActionListener {
-    JFrame jf;
     JLabel l1, l2, l3;
     JTextField t1, t2, t3;
     JButton b1, b2, b3;
@@ -19,14 +16,11 @@ class PracticeQn extends JFrame implements ActionListener {
     Hashtable<String, Integer> ts;
 
     PracticeQn() {
-
-        jf = new JFrame();
-
         ts = new Hashtable<>();
 
         l1 = new JLabel("Enter City Name :");
         l2 = new JLabel("Enter City Code :");
-        l3 = new JLabel("Enter City Name to Search : ");
+        l3 = new JLabel("Enter City Name (Search / Remove) : ");
 
         t1 = new JTextField(10);
         t2 = new JTextField(10);
@@ -36,78 +30,126 @@ class PracticeQn extends JFrame implements ActionListener {
         b2 = new JButton("SEARCH");
         b3 = new JButton("REMOVE");
 
-        t = new JTextArea(20, 20);
+        t = new JTextArea(10, 30);
 
         p1 = new JPanel();
         p1.add(t);
-        add(p1);
+        add(p1, BorderLayout.NORTH);
 
-        p2 = new JPanel();
+        p2 = new JPanel(new GridLayout(5,2));
         p2.add(l1);
         p2.add(t1);
         p2.add(l2);
         p2.add(t2);
-        p2.add(b1);
         p2.add(l3);
         p2.add(t3);
+        p2.add(b1);
         p2.add(b2);
         p2.add(b3);
+        add(p2, BorderLayout.CENTER);
 
         b1.addActionListener(this);
         b2.addActionListener(this);
         b3.addActionListener(this);
 
         t.setEditable(false);
-        add(p1);
-        add(p2);
+      
         setSize(400, 400);
-
-        setLayout(new FlowLayout());
+        setTitle("City");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        pack();
+       
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
-        if (b1 == e.getSource()) {
-            String nm = t1.getText(); // get name
-            int code = Integer.parseInt(t2.getText()); // get Code
-            ts.put(nm, code); // put in hashtable
+        Object src = e.getSource();
 
-            Enumeration<String> k = ts.keys();
-            Enumeration<Integer> v = ts.elements();
+        if (src == b1) {
 
-            String msg = "";
-            while (k.hasMoreElements()) {
-                msg = msg + k.nextElement() + "=" + v.nextElement() + "\n";
-            }
-            t.setText(msg);
-            t1.setText("");
-            t2.setText("");
+            addCity();
 
-            if (ts != null)
-                JOptionPane.showMessageDialog(null, "Data Inserted...");
-            else
-                JOptionPane.showMessageDialog(null, "Data not Inserted...");
-        } else if (b2 == e.getSource()) { // Search
+        } else if (src == b2) {
 
-            String nm = t3.getText(); // get city name to be search
+            searchCity();
 
-            if (ts.containsKey(nm)) {
-                t.setText(ts.get(nm).toString());
-            } else {
-                JOptionPane.showMessageDialog(null, "Data not found...");
-            }
-        } else if (b3 == e.getSource()) {
-            String nm = t3.getText();
+        } else if (src == b3) {
 
-            if(ts.containsKey(nm)){
-                ts.remove(nm);
-                JOptionPane.showMessageDialog(null,  nm +"  City deleted..");
-            }else{
-                JOptionPane.showMessageDialog(null, "City Not Found");
-            }
+            removeCity();
         }
+    }
+
+    void addCity() {
+        String city = t1.getText().trim(); // get name
+        String code = t2.getText(); // get Code
+
+        if (city.isEmpty() || code.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Enter city Name and Code : ");
+            return;
+        }
+
+        try {
+            int c = Integer.parseInt(code);
+            ts.put(city, c); // put in hashtable
+
+            displayAll();
+            clearFields();
+
+            JOptionPane.showMessageDialog(null, "City Add Successfully...");
+
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void searchCity() {
+
+        String city = t3.getText().trim(); // get city name to be search
+
+        if (city.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Enter city name to search ");
+            return;
+        }
+        Integer code = ts.get(city);
+        if (code != null) {
+            JOptionPane.showMessageDialog(
+                    this, city + " = " + code, " Search Result",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } else {
+        JOptionPane.showMessageDialog(null, "City not found...");
+        }
+    }
+
+    public void removeCity() {
+
+        String city = t3.getText().trim();
+
+        if (city.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Enter city name to remove");
+            return;
+        }
+
+        if (ts.remove(city) != null) {
+            displayAll();
+            JOptionPane.showMessageDialog(this, city + " City Remove successfully...");
+        } else {
+            JOptionPane.showMessageDialog(null, "City Not Found");
+        }
+
+    }
+
+    public void displayAll() {
+        StringBuilder sb = new StringBuilder();
+        for (String key : ts.keySet()) {
+            sb.append(key).append(" = ").append(ts.get(key)).append("\n");
+        }
+        t.setText(sb.toString());
+    }
+
+    public void clearFields() {
+        t1.setText("");
+        t2.setText("");
     }
 
     public static void main(String[] args) {
