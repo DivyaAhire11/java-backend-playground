@@ -21,3 +21,23 @@ JAVA THREAD STATE : NEW , RUNNABLE , BLOCKED , WAITING , TIME_WAITING , TERMINAT
                 --> InterruptedException 
                 --> static method
                 --> Does not release lock
+
+main thread pause : waits until t1 completes : main thread enters WAITING state
+
+join(); // wait indefinitely
+join(long millis); // wait up to millis
+
+THREAD Priority:
+  --> Thread priority tells JVM which thread should get CPU first. BUt it is only a HINT, not a guarantee
+  --> t1.setPriority(Thread.MIN_PRIORITY)
+  ---> Thread.currentThread().getPriority()
+
+  1- MIN_PRIORITY
+  5- NORN_PRIORITY
+  10- MAX_PRIORITY
+
+  t1.setPriority(15) : throws --> IllegalArgumentException
+
+  Deamon Thread : background thread runs only while user thread are running.
+  --> when all user threads finish , JVM automatically stops daemon thread.
+  eg : garbage collector
