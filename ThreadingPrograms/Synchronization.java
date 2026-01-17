@@ -1,6 +1,7 @@
 package ThreadingPrograms;
 //Race condition Problem: when multiple threads access same data at a same time , result becomes wrong.
 // 2 threads do it together : thread interference
+//without synchronization
 class Counter{
     int cnt =0;
 
