@@ -1,34 +1,44 @@
 package JavaJourney;
 
 import java.util.TreeSet;
-import java.util.HashSet;
 import java.util.Scanner;
 /*
     write a java program to accept 'n' integers from the user and store them in a collection.
     Display them in the sorted order. The collection should not accept duplicate elements.
     (Use a suitable collection). Search for a particular element using predefined search method in the Collection framework.
 */
-class NumberCollection{
+//TreeSet : does not allow duplicates ele
+// automatically stores ele in sorted order
+//provide search method : contains(Object o)
+
+class SortedCollectionSearch{
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        HashSet<Integer> hs = new HashSet<>();
+
+        //TreeSet : does not allow duplicates and stores elements in sorted order
+
+       TreeSet<Integer> ts = new TreeSet<>();
         
-        System.out.println("Enter How Many Numbers U Wnats to Enter? : ");
+        System.out.print("Enter How Many Numbers U Wnats to Enter? : ");
         int n = sc.nextInt();
          System.out.println("Enter "+n+" Elements in Collection : ");
         for(int i =0;i<n;i++){
-            hs.add(sc.nextInt());
+            ts.add(sc.nextInt()); //duplicate are automatically ignored
         }
 
-        System.out.println("\n----------- BEFORE SORTING ------------");
-        for(Integer data : hs){
-            System.out.println(data + "\t");
-        }
-
-        System.out.println("\n----------- AFTER SORTING --------------");
-        TreeSet<Integer> ts = new TreeSet<>(hs);
+        System.out.println("\n----------- Elements in SORTED ORDER --------------"); 
          for(Integer sortedData : ts){
             System.out.println(sortedData + "\t");
+        }
+
+        //search for an element using predefined method
+        System.out.print("\n Enter element to be searched? :");
+        int key = sc.nextInt();
+
+        if(ts.contains(key)){
+            System.out.println("Element "+key+" is found in the Collection.");
+        }else{
+            System.out.println("Element "+key+" is NOT found in the Collection.");
         }
         sc.close();
     }
