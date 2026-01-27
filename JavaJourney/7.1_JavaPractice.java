@@ -10,9 +10,10 @@ import java.util.Random;
 */
 
 class NumberGenerator implements Runnable {
-   SharedData data;
+  SharedData data;
+
   NumberGenerator(SharedData data) {
-     this.data = data;
+    this.data = data;
   }
 
   public void run() {
@@ -22,7 +23,7 @@ class NumberGenerator implements Runnable {
         int num = r.nextInt(100); // generate number from 0 - 99
 
         data.setNumber(num);
-        
+
         System.out.println("\n Generated Number : " + num);
         Thread.sleep(1000);
       }
