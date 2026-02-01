@@ -3,11 +3,6 @@ package JDBC;
 import java.sql.DriverManager;
 import java.sql.Connection;
 /*
-CREATE TABLE student(
- id INT PRIMARY KEY,
- name VARCHAR(50),
- marks INT
- );
  
  Class.forName() : loads JDBC driver
  DriverManager.getConnection() : connect java with database
@@ -20,10 +15,10 @@ public class JDBCConnect {
         try {
 
             // 1 .Load Driver
-            Class.forName("org.postgresql.Driver");
+            // Class.forName("org.postgresql.Driver");
 
             // 2 .Create Connection
-           Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/testdb","postgres","tybcs");
+           Connection con = DriverManager.getConnection("DB_URL", "DB_USER","DB_PASSWORD");
        
             System.out.println("DataBase Connected Successfully!");
        

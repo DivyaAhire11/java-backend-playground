@@ -9,11 +9,10 @@ public class SelectExample {
     public static void main(String[] args) {
         try {
             // 1. load driver
-            Class.forName("org.posgresql.Driver");
+            // Class.forName("org.postgresql.Driver");
 
             // 2. create connection
-            Connection con = DriverManager.getConnection("/jdbc:postgresql://localhost:5432/testdb", "postgres",
-                    "tybcs");
+            Connection con = DriverManager.getConnection("DB_URL", "DB_USER","DB_PASSWORD");
 
             // 3. create statement
             Statement stm = con.createStatement();
@@ -22,8 +21,15 @@ public class SelectExample {
             ResultSet rs = stm.executeQuery("SELECT * FROM student");
 
             // 5.Process Result
-            while (rs.next()) {
-               System.out.println(rs.getInt("id"+" "+rs.getString("name")+" "+rs.getInt("marks")));
+            //getInt() : fetch INT column
+            //getString() : fetch VARCHAR
+
+           while (rs.next()) {  //next() : move to next row
+                System.out.println(
+                    rs.getInt("id") + " " + 
+                    rs.getString("name") + " " +
+                    rs.getInt("marks")
+                );
             }
             // connection close
             con.close();
