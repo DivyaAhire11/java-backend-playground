@@ -1,0 +1,16 @@
+JDBC : java database connectivity
+it is an API that allow java programs to
+
+* connect to database
+* execute SQL queries
+* retrieve & update data
+
+Java Application
+      |
+      |
+JDBC API(java.sql)
+      |
+      |
+JDBC Driver
+      |
+database(Postgres/MySQL)
