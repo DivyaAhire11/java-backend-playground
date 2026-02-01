@@ -12,8 +12,11 @@ public class SelectExample {
             // Class.forName("org.postgresql.Driver");
 
             // 2. create connection
-            Connection con = DriverManager.getConnection("DB_URL", "DB_USER","DB_PASSWORD");
+            String url = System.getenv("DB_URL");
+            String user = System.getenv("DB_USER");
+            String password = System.getenv("DB_PASSWORD");
 
+            Connection con = DriverManager.getConnection(url, user, password);
             // 3. create statement
             Statement stm = con.createStatement();
 
@@ -21,15 +24,14 @@ public class SelectExample {
             ResultSet rs = stm.executeQuery("SELECT * FROM student");
 
             // 5.Process Result
-            //getInt() : fetch INT column
-            //getString() : fetch VARCHAR
+            // getInt() : fetch INT column
+            // getString() : fetch VARCHAR
 
-           while (rs.next()) {  //next() : move to next row
+            while (rs.next()) { // next() : move to next row
                 System.out.println(
-                    rs.getInt("id") + " " + 
-                    rs.getString("name") + " " +
-                    rs.getInt("marks")
-                );
+                        rs.getInt("id") + " " +
+                                rs.getString("name") + " " +
+                                rs.getInt("marks"));
             }
             // connection close
             con.close();
