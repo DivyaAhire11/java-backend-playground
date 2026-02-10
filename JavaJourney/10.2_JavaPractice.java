@@ -89,7 +89,7 @@ class FirstRecordDemo extends JFrame implements ActionListener {
                 return;
             }
 
-            if (rs.first()) {
+            if (rs.next()) {
                 t1.setText(String.valueOf(rs.getInt("id")));
                 t2.setText(rs.getString("name"));
                 t3.setText(String.valueOf(rs.getDouble("marks")));
