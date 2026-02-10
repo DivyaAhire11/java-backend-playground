@@ -5,7 +5,6 @@ package JDBC;
 /*  BATCH PROCESSING :
         Multiple SQL -> one DB call
         Fast
-
 */
 import java.sql.*;
 
