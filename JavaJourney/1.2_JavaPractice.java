@@ -1,4 +1,4 @@
- package JavaJourney;
+package JavaJourney;
 
 /**
  * Write a Java Program to accept the details of employee(ENO , EName, Designation, Salary )from a user and store it into the database.(Use Swing)
@@ -46,33 +46,32 @@ class EmployeeForm extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         try {
             int eno = Integer.parseInt(EmpNo.getText());
-            String name= EmpNm.getText();
+            String name = EmpNm.getText();
             String designation = degn.getText();
-           double sry = Double.parseDouble(salary.getText());
+            double sry = Double.parseDouble(salary.getText());
 
-           Class.forName("com.mysql.cj.jdbc.Driver");
-           Connection con = DriverManager.getConnection(
-               "jdbc:mysql://localhost:3306/company","root","password"
-           );
-           String sql = "INSERT INTO employee VALUES(?,?,?,?)";
-           PreparedStatement ps = con.prepareStatement(sql);
+            Class.forName("org.postgresql.Driver");
+            Connection con = DriverManager.getConnection(
+                    System.getenv("DB_URL"),  System.getenv("DB_USER"),  System.getenv("DB_PASSWORD"));
+            String sql = "INSERT INTO employee VALUES(?,?,?,?)";
+            PreparedStatement ps = con.prepareStatement(sql);
 
-           ps.setInt(1, eno);
-           ps.setString(2, name);
-           ps.setString(3, designation);
-           ps.setDouble(4, sry);
+            ps.setInt(1, eno);
+            ps.setString(2, name);
+            ps.setString(3, designation);
+            ps.setDouble(4, sry);
 
-           ps.executeUpdate();
-          
-           JOptionPane.showMessageDialog(this, "Employee Record Saved");
+            ps.executeUpdate();
+
+            JOptionPane.showMessageDialog(this, "Employee Record Saved");
         } catch (Exception ex) {
-           JOptionPane.showMessageDialog(this, ex.getMessage());
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
 }
 
 class Main {
     public static void main(String[] args) {
-          new EmployeeForm();
+        new EmployeeForm();
     }
 }
