@@ -1,5 +1,12 @@
 package JavaJourney;
 
+// javac -cp "postgresql-42.7.9.jar" JavaJourney\12.2_JavaPractice.java
+//java -cp "postgresql-42.7.9.jar;." JavaJourney.ProjectTableDemo 
+
+/*write a java program to create a PROJECT table with fields 
+  project_id , project_name,project_description,project_status.
+  Insert values in the table. Display all the details of the PROJECT table in a tabular format on the screen(using swing).
+*/
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -8,7 +15,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class ProjectTableDemo extends JFrame {
+class ProjectTableDemo extends JFrame {
 
     JTable table;
     DefaultTableModel model;
@@ -29,22 +36,27 @@ public class ProjectTableDemo extends JFrame {
 
         setLocationRelativeTo(null); // center window
         setVisible(true);
+        
     }
 
     void fetchData() {
-        String sql = "SELECT id, name, description, status FROM project";
+       
 
         try {
             // Load PostgreSQL driver
             Class.forName("org.postgresql.Driver");
 
             // Create connection
-            try (Connection con = DriverManager.getConnection(
+            Connection con = DriverManager.getConnection(
                     System.getenv("DB_URL"),
                     System.getenv("DB_USER"),
-                    System.getenv("DB_PASSWORD"));
+                    System.getenv("DB_PASSWORD")
+            );
+
+            String sql = "SELECT * FROM project";
+
                  Statement st = con.createStatement();
-                 ResultSet rs = st.executeQuery(sql)) {
+                 ResultSet rs = st.executeQuery(sql);
 
                 // Insert data into JTable
                 while (rs.next()) {
@@ -56,7 +68,7 @@ public class ProjectTableDemo extends JFrame {
                     };
                     model.addRow(row);
                 }
-            }
+            con.close();
 
         } catch (Exception e) {
             e.printStackTrace();
