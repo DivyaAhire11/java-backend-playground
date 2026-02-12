@@ -30,7 +30,7 @@ class ProjectTableDemo extends JFrame {
         model = new DefaultTableModel(cols, 0);
         table = new JTable(model);
 
-        add(new JScrollPane(table), BorderLayout.CENTER);
+        add(table, BorderLayout.CENTER);
 
         fetchData();
 
@@ -80,6 +80,6 @@ class ProjectTableDemo extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(ProjectTableDemo::new);
+        new ProjectTableDemo();
     }
 }
