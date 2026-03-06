@@ -5,7 +5,21 @@ package JavaJourney;
    program should print randomly the name of thread and value of sleep time.
    The name of the thread should be hard coded through constructor.
    The sleep time of a thread will be a random integer in the range 0 to 4999.
+
+
+*) creation State : 
+      LifeCycleThread t1 = new LifeCycleThread("THREAD-A");
+
+*) sleep state : 
+      sleepTime = r.nextInt(5000);
+     Thread.sleep(sleepTime)
+
+*) Dead state : after execution of run() method completes,the thread enters dead state
+
 */
+
+
+
 import java.util.Random;
 
 class LifeCycleThread extends Thread{
