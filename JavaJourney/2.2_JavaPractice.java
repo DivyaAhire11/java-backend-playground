@@ -20,6 +20,17 @@ SERVER INFO
    - OS
    - server name
    - loaded servlet(via ServletContext attribute)
+
+
+   
+   Q. which object givs client request info?
+   --> HttpServletrequest
+
+   Q. which object gives server info?
+   --> ServletContext
+
+   Q. Brower info stored where?
+   --> HTTP Header - user-Agent
 */
 @WebServlet(urlPatterns = { "/MyServlet" })
 class MyServlet extends HttpServlet {
