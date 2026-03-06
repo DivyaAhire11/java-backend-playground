@@ -60,3 +60,16 @@
         </body>
 
         </html>
+
+        <!-- 
+        OUTPUT:
+
+               Patient Details
+               
+      NO	NAME	ADDRESS	AGE	DISASE
+      101	Rahul	Mumbai	35	Fever
+      102	Anita	Pune	28	Cold
+      103	Amit	Delhi	40	Diabetes
+      104	Riya	Nashik	35	Headeche
+        
+        -->
