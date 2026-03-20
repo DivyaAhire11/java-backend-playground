@@ -1,4 +1,5 @@
-package JavaJourney;
+// package JavaJourney;
+
 /*
   write a java program to define a thread for printing text on output screen for 'n' number of times. Create 3 threads and run them. Pass the text 'n' parameters to the thread constructor.
    Example : 
@@ -7,6 +8,7 @@ package JavaJourney;
         3. Third thread prints "VACCINSTION2021" 30 times
 */
 // because threads run concurrently, the output will bw interleaved 
+
 class PrintTextThread extends Thread{
    String text;
    int n;
