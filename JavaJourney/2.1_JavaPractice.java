@@ -1,4 +1,4 @@
-package JavaJourney;
+// package JavaJourney;
 /*
    Write a java program to read 'N' names of your friends , store it into HashSet and display them in ascending order.
  */

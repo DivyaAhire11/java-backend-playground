@@ -1,11 +1,11 @@
 package ThreadingPrograms;
 //Method level lock
 
-//synchronized : only one thread can execute this method at a time 
+// synchronized : only one thread can execute this method at a time 
 // Other threads must wait until lock is released
 // lock is taken on object c
 // this create critical section : code that must be executed by only one thread
-//Lock /Monitor : Mechanisms used by synchronized
+// Lock /Monitor : Mechanisms used by synchronized
 // Mutual Exclusive : Only one thread allow at a time 
 
 class Counter {

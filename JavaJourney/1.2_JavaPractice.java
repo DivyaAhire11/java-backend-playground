@@ -1,7 +1,8 @@
-package JavaJourney;
+// package JavaJourney;
 
 /**
- * Write a Java Program to accept the details of employee(ENO , EName, Designation, Salary )from a user and store it into the database.(Use Swing)
+ * Write a Java Program to accept the details of employee(ENO , EName, Designation, Salary )from a user 
+ * and store it into the database.(Use Swing)
  */
 
 import javax.swing.*;

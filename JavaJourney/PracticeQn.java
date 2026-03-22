@@ -1,4 +1,4 @@
-package JavaJourney;
+// package JavaJourney;
 
 import java.util.Hashtable;
 

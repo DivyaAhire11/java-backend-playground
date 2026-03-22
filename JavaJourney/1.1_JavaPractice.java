@@ -1,4 +1,4 @@
-package JavaJourney;
+// package JavaJourney;
 /**
  * Write a Java Program to display all the alphabets between 'A' to 'Z' after every 2 seconds.
  */
