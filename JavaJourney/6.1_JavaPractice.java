@@ -1,4 +1,4 @@
-package JavaJourney;
+// package JavaJourney;
 
 import java.util.TreeSet;
 import java.util.Scanner;
