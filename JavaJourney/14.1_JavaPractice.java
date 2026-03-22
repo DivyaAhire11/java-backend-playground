@@ -1,53 +1,79 @@
-package JavaJourney;
-/*
-  write a java program for a simple search engine. Accept a string to be searched. Search the string in all text files in the currect folder. Use a separate thread for each file. The result should display the filename and line number where the string is found.
-*/
+import java.io.*;
+import java.util.ArrayList;
 
-import java.io.BufferedReader;
-//thread class for searching a word in one file
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
+// Thread class
+class FileSearch extends Thread {
+    File file;
+    String keyword;
 
-class FileSearchThread extends Thread {
-    public static void main(String[] args) {
-       try {
-        
-     
-        private File file;
-        private String search;
+    static boolean found = false;
 
-        FileSearchThread(File file ,String search){
-             this.file = file;
-             this.search = search;
-        }
-
-        public void run(){
-             try {
-                BufferedReader br = new BufferedReader(new FileReader(file));
-            String line;
-            int lineNo = 0;
-            boolean found = false;
-
-           while((line = br.readLine()) != null){
-               lineNo++;
-               if(line.contains(search)){
-                System.out.println("Found in File : "+ file.getName()+ "at line No :" + lineNo);
-                found= true;
-               }
-           }
-
-             } catch (IOException e) {
-                e.printStackTrace();
-             }catch(ClassNotFoundException ee){
-                ee.printStackTrace();
-             }
-        }
-
-        } catch (Exception ex) {
-               ex.printStackTrace();
-        }
+    FileSearch(File file, String keyword) {
+        this.file = file;
+        this.keyword = keyword;
     }
 
+    public void run() {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+            int lineNo = 0;
+
+            while ((line = br.readLine()) != null) {
+                lineNo++;
+
+                // simple search (case-sensitive)
+                if (line.contains(keyword)) {
+                    System.out.println("Found in " 
+                        + file.getName() + " at line " + lineNo);
+                    found = true;
+                }
+            }
+
+            br.close();
+
+        } catch (Exception e) {
+            System.out.println("Error in file: " + file.getName());
+        }
+    }
+}
+
+// Main class
+class SimpleSearchEngine {
+    public static void main(String[] args) throws Exception {
+
+        BufferedReader input = new BufferedReader(
+                new InputStreamReader(System.in));
+
+        // input keyword
+        System.out.print("Enter word to search: ");
+        String keyword = input.readLine();
+
+        File folder = new File(".");
+        File[] files = folder.listFiles();
+
+        ArrayList<FileSearch> list = new ArrayList<>();
+
+        // create threads
+        for (File f : files) {
+            if (f.isFile() && f.getName().endsWith(".txt")) {
+
+                FileSearch t = new FileSearch(f, keyword);
+                list.add(t);
+                t.start();
+            }
+        }
+
+        // wait for threads
+        for (FileSearch t : list) {
+            t.join();
+        }
+
+        // result
+        if (!FileSearch.found) {
+            System.out.println("Not Found");
+        }
+
+        System.out.println("Search Completed");
+    }
 }
