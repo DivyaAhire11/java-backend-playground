@@ -1,3 +1,16 @@
+<!--
+ Which class used for time?
+ - Calendar
+
+ Method to get hour?
+ - get(Calendar.HOUR_OF_DAY)
+
+ Which JDBC class used?
+ - PreparedStatement
+ 
+-->
+
+
 <%@page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
